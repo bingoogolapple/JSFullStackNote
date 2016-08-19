@@ -2,4 +2,4 @@ FROM node
 MAINTAINER bingoogolapple
 COPY app.js app.js
 CMD ["node","app.js"]
-EXPOSE 80
+EXPOSE 8888

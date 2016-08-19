@@ -4,5 +4,5 @@ var requestHandler = function(req, res) {
     res.end('Hello Docker Node DaoCloud 测试自动发布\n');
 }
 var web = http.createServer(requestHandler);
-web.listen(80);
-console.log('Server running at http://localhost:80');
+web.listen(8888);
+console.log('Server running at http://localhost:8888');
