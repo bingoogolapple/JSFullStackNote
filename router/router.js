@@ -3,47 +3,70 @@
  */
 
 var formidable = require("formidable");
-
-// 暂时先存到内存中
-var comments = [];
+var Comment = require("../models/Comment");
 
 
 exports.getComments = function (req, res, next) {
-    res.json(comments);
+    Comment.find({}, function (err, result) {
+        if (err) {
+            console.log("获取评论列表失败");
+            return res.json({
+                code: -2,
+                msg: "获取评论列表失败" + err
+            });
+        }
+        console.log("获取评论列表成功");
+        // result就是所有Comment数组
+        res.json({
+            code: 0,
+            data: result
+        });
+    });
 };
 
 exports.addComment = function (req, res, next) {
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
-        if (comments.length > 10) {
-            res.json({
-                code: -1,
-                msg: "最多只能添加10条"
-            });
-            return;
-        }
-
         var author = fields.author;
         var text = fields.text;
         if (author.length == 0) {
-            res.json({
+            return res.json({
                 code: -1,
                 msg: "用户名不能为空"
             });
-            return;
         }
         if (text.length == 0) {
-            res.json({
-                code: -2,
+            return res.json({
+                code: -1,
                 msg: "内容不能为空"
             });
-            return;
         }
-        comments = comments.concat({author, text, date: new Date()});
 
-        res.json({
-            code: 0,
-            data: comments
+        Comment.create({author, text}, function (err, doc) {
+            if (err) {
+                return res.json({
+                    code: -2,
+                    msg: "添加评论失败" + err
+                });
+            }
+            console.log("添加评论成功");
+
+            Comment.find({}, function (err, result) {
+                if (err) {
+                    console.log("获取评论列表失败");
+                    return res.json({
+                        code: -2,
+                        msg: "获取评论列表失败" + err
+                    });
+                }
+                console.log("获取评论列表成功");
+                // result就是所有Comment数组
+                res.json({
+                    code: 0,
+                    data: result
+                });
+            });
+
         });
     });
 };

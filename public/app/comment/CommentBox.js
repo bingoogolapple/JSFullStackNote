@@ -17,8 +17,12 @@ class CommentBox extends React.Component {
     }
 
     getComments() {
-        $.get("comment", comments => {
-            this.setState({data: comments});
+        $.get("comment", result => {
+            if (result.code == 0) {
+                this.setState({data: result.data});
+            } else {
+                alert(result.msg);
+            }
         }, "json");
     }
 
