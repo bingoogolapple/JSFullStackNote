@@ -14,6 +14,6 @@ RUN npm install
 
 RUN jspm install
 
-EXPOSE 3000
+EXPOSE 80
 
 CMD forever app.js

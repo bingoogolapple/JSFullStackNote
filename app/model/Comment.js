@@ -4,7 +4,7 @@
 var mongoose = require('mongoose');
 
 //schema
-var commentSchema = new mongoose.Schema({
+var CommentSchema = new mongoose.Schema({
     "cid"  : Number,
     "author" : String,
     "text" : String,
@@ -15,9 +15,7 @@ var commentSchema = new mongoose.Schema({
 });
 
 //索引
-commentSchema.index({ "cid": 1});
+CommentSchema.index({ "cid": 1});
 
 //model
-var Comment = mongoose.model("Comment",commentSchema);
-
-module.exports = Comment;
+mongoose.model("Comment",CommentSchema);
