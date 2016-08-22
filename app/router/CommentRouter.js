@@ -8,4 +8,6 @@ module.exports = function(app) {
     app.route('/comment')
         .get(CommentController.list)
         .post(CommentController.create);
+
+    app.route('/clear').get(CommentController.clear);
 }

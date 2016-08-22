@@ -70,5 +70,21 @@ module.exports = {
                 data: result
             });
         });
+    },
+    clear: function (req, res, next) {
+        Comment.remove({},function(err){
+            if (err) {
+                console.log("清空评论失败");
+                return res.json({
+                    code: -2,
+                    msg: "清空评论失败" + err
+                });
+            }
+            console.log("清空评论成功");
+            res.json({
+                code: 0,
+                msg: "清空评论成功"
+            });
+        });
     }
 }

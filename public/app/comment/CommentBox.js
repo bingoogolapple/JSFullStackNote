@@ -17,7 +17,7 @@ class CommentBox extends React.Component {
     }
 
     getComments() {
-        $.get("comment", result => {
+        $.get("/comment", result => {
             if (result.code == 0) {
                 this.setState({data: result.data});
             } else {
@@ -27,7 +27,7 @@ class CommentBox extends React.Component {
     }
 
     handleCommentSubmit(comment) {
-        $.post("comment", comment, result => {
+        $.post("/comment", comment, result => {
             if (result.code == 0) {
                 this.setState({data: result.data});
             } else {
@@ -39,7 +39,7 @@ class CommentBox extends React.Component {
     render() {
         return (
             <div className="ui comments">
-                <h1>评论</h1>
+                <h1>{this.props.isAdmin ? "管理评论" : "评论列表"}</h1>
                 <div className="ui divider"></div>
                 <CommentList data={this.state.data}/>
                 <CommentForm onCommentSubmit={this.handleCommentSubmit.bind(this)}/>
