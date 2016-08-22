@@ -4,8 +4,7 @@
 
 var path = require('path');
 var webpack = require('webpack');
-
-var args = require('node-args');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var config = {
     entry: {
@@ -22,7 +21,7 @@ var config = {
         noParse: [/jquery/, /silly-datetime/],
         loaders: [{
             test: /\.css$/,
-            loader: 'style!css'
+            loader: ExtractTextPlugin.extract("style-loader", "css-loader")
         }, {
             test: /images/,
             loader: 'file'
@@ -31,13 +30,19 @@ var config = {
             loader: 'url'
         }, {
             test: /\.scss$/,
-            loader: 'style!css!sass'
+            loader: ExtractTextPlugin.extract("style-loader", "css-loader", "sass-loader")
         }, {
-            test: /\.js$/,
+            test: /\.js[x]?$/,
             exclude: /node_modules/,
             loaders: ['react-hot', 'babel?presets[]=es2015&presets[]=react']
         }]
     },
+    resolve: {
+        extensions: ['', '.js', '.jsx'],
+    },
+    plugins: [
+        new ExtractTextPlugin("[name].bundle.css")
+    ],
     devServer: {
         proxy: {
             '/comment': {
@@ -48,14 +53,24 @@ var config = {
     }
 };
 
-if (args.minify) {
+
+if (process.env.NODE_ENV === 'production') {
     config.plugins = [
         new webpack.optimize.UglifyJsPlugin({
+            output: {
+                comments: false
+            },
             compress: {
                 warnings: false
             }
         }),
-        new webpack.optimize.OccurrenceOrderPlugin()
+        new webpack.optimize.OccurrenceOrderPlugin(),
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+            }
+        }),
+        new ExtractTextPlugin("[name].bundle.css")
     ];
 }
 
