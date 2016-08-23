@@ -16,7 +16,6 @@ var config = {
         publicPath: '/dist/',
         filename: '[name].bundle.js'
     },
-    devtool: 'source-map',
     module: {
         noParse: [/jquery/, /silly-datetime/],
         loaders: [{
@@ -28,9 +27,6 @@ var config = {
         }, {
             test: /icons/,
             loader: 'url'
-        }, {
-            test: /\.scss$/,
-            loader: ExtractTextPlugin.extract("style-loader", "css-loader", "sass-loader")
         }, {
             test: /\.js[x]?$/,
             exclude: /node_modules/,
@@ -72,6 +68,8 @@ if (process.env.NODE_ENV === 'production') {
         }),
         new ExtractTextPlugin("[name].bundle.css")
     ];
+} else {
+    config.devtool = 'source-map';
 }
 
 module.exports = config;
