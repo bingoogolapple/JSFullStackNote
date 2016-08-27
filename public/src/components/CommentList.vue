@@ -4,7 +4,7 @@
     </comment>
   </div>
 </template>
-<style>
+<style scoped>
 </style>
 <script>
   import Comment from './Comment.vue'

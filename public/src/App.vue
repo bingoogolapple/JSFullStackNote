@@ -5,24 +5,24 @@
 </template>
 
 <script>
-import CommentBox from './components/CommentBox.vue'
+  import CommentBox from './components/CommentBox.vue'
 
-export default {
-  components: {
-    CommentBox
+  export default {
+    components: {CommentBox}
   }
-}
 </script>
 
 <style>
-html {
-  height: 100%;
-}
+  @import '~vux/dist/vux.css';
 
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
+  html {
+    height: 100%;
+  }
+
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
 </style>

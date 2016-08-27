@@ -1,29 +1,24 @@
 <template>
   <form v-on:submit.prevent="onSubmitComment">
-    <div>
-      <input type="text" placeholder="姓名" v-model="author"/>
-    </div>
-    <div>
-      <textarea type="text" placeholder="评论" v-model="text"></textarea>
-    </div>
-    <button type="submit">添加评论</button>
+    <group title="邮箱">
+      <x-input placeholder="请输入邮箱" is-type=email :value.sync="author"></x-input>
+    </group>
+    <group title="评论">
+      <x-textarea :max="20" placeholder="请输入评论" :value.sync="text"></x-textarea>
+    </group>
+    <x-button class="submit-btn" type="primary">添加评论</x-button>
   </form>
 </template>
-<style>
-  input {
-    margin: 4px;
-  }
-  textarea {
-    margin: 4px;
-  }
-  button {
-    background-color: #6C9FFC;
-    font-size: 16px;
-    color: #ffffff;
-    border-radius: 8px;
+<style scoped>
+  .submit-btn {
+    margin-top: 40px;
   }
 </style>
 <script>
+  import Group from 'vux-components/group'
+  import XInput from 'vux-components/x-input'
+  import XTextarea from 'vux-components/x-textarea'
+  import XButton from 'vux-components/x-button'
 
   export default{
     data: function () {
@@ -32,8 +27,9 @@
         text: ""
       }
     },
+    components: {Group, XInput, XTextarea, XButton},
     methods: {
-      onSubmitComment: function() {
+      onSubmitComment: function () {
         if (this.author.length > 0 && this.text.length > 0) {
           // 子组件向父组件传递用dispatch
           this.$dispatch('onSubmitComment', this.author, this.text)
@@ -43,7 +39,7 @@
       }
     },
     events: {
-      onSubmitCommentSuccess: function() {
+      onSubmitCommentSuccess: function () {
         this.author = ""
         this.text = ""
       }

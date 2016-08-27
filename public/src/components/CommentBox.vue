@@ -1,19 +1,16 @@
 <template>
   <div>
-    <h1>Vue.js、Node.js学习笔记</h1>
-    <div></div>
+    <x-header :left-options="{showBack: false}" style="background-color:#69BF1C">Vue.js、Node.js 学习笔记</x-header>
     <comment-list :comments="comments"></comment-list>
     <comment-form></comment-form>
   </div>
 </template>
-<style>
-  h1 {
-    color: #42b983;
-  }
+<style scoped>
 </style>
 <script>
   import CommentList from './CommentList.vue'
   import CommentForm from './CommentForm.vue'
+  import XHeader from 'vux-components/x-header'
 
   export default{
     data: function () {
@@ -21,7 +18,7 @@
         comments: []
       }
     },
-    components: {CommentList, CommentForm},
+    components: {CommentList, CommentForm, XHeader},
     events: {
       onSubmitComment:function(author, text) {
         var formData = new FormData();

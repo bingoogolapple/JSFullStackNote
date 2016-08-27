@@ -17,4 +17,7 @@ npm install
 npm install vue-router --save
 npm install vue-resource --save
 npm install silly-datetime --save
+
+npm install vux --save
+npm install less less-loader --save-dev
 ```
