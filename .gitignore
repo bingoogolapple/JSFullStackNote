@@ -60,3 +60,4 @@ npm-debug.log
 universe
 .babel-cache
 mongo-test-output
+src/assets/
