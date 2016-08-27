@@ -11,7 +11,7 @@ module.exports = function () {
     var app = express();
 
     // 设置静态资源目录
-    app.use(express.static("./public"));
+    app.use(express.static("./public/dist"));
 
     require('../app/router/CommentRouter')(app);
 
