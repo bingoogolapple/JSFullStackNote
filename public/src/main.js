@@ -12,14 +12,16 @@ const router = new VueRouter({
   hashbang: false
 })
 
-router.map({
-  '/index': {
-    component: App
-  }
-})
+router.map({})
 
-router.redirect({
-  '*': '/index'
-})
+// router.map({
+//   '/index': {
+//     component: App
+//   }
+// })
+
+// router.redirect({
+//   '*': '/index'
+// })
 
 router.start(App, '#app')
