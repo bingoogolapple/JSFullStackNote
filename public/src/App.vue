@@ -7,8 +7,20 @@
 <script>
   import CommentBox from './components/CommentBox.vue'
 
+  import store from './vuex/store'
+  import { initStore } from './vuex/actions'
+
   export default {
-    components: {CommentBox}
+    components: {CommentBox},
+    store,
+    vuex: {
+      actions: {
+        initStore
+      }
+    },
+    ready: function() {
+      this.initStore()
+    }
   }
 </script>
 

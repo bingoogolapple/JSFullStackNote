@@ -20,4 +20,6 @@ npm install silly-datetime --save
 
 npm install vux --save
 npm install less less-loader --save-dev
+
+npm install vuex --save
 ```

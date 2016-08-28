@@ -51,9 +51,6 @@
     props: ['comment'],
     methods: {
       fromNow: fromNow
-    },
-    ready: function () {
-      console.log("Comment ready")
     }
   }
 </script>
